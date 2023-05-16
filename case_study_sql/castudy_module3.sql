@@ -218,5 +218,11 @@ WHERE
 GROUP BY ma_khach_hang
 ORDER BY COUNT(*);
 
-
-
+select k.ma_khach_hang,k.ho_ten,lk.ten_loai_khach,hp.ma_hop_dong,dv.ten_dich_vu,
+hp.ngay_lam_hop_dong,hp.ngay_ket_thuc  from
+khach_hang k
+left join loai_khach lk on lk.ma_loai_khach=k.ma_loai_khach
+join hop_dong_chi_tiet ht on ht.ma_hop_dong=hp.ma_hop_dong
+-- left join dich_vu_di_kem dk on dk.ma_dich_vu_di_kem = ht.ma_dich_vu_di_kiem
+right join hop_dong hp on hp.ma_khach_hang=k.ma_khach_hang
+join dich_vu dv on dv.ma_dich_vu=hp.ma_dich_vu;
