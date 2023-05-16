@@ -161,6 +161,20 @@ value('2020-12-08','2020-12-08',0,3,1,3),
 	('2021-05-25','2021-05-27',0,7,10,1);
 insert into hop_dong_chi_tiet(ma_hop_dong,so_luong,ma_dich_vu_di_kem)
 value(2,5,4),(2,8,5),(2,15,6),(3,1,1),(3,11,2),(1,1,3),(1,2,2),(12,2,2);
-				
+
+select * from nhan_vien
+where (substring_index(ho_ten," ",-1) like "H%" or 
+substring_index(ho_ten," ",-1) like "T%" or 
+substring_index(ho_ten," ",-1) like "K%")
+and (char_length(ho_ten)<16);
+
+select * from khach_hang
+where TIMESTAMPDIFF (YEAR,ngay_sinh, CURDATE())>18 and TIMESTAMPDIFF (YEAR,ngay_sinh, CURDATE())<50
+and( dia_chi like "%Đà Nẵng%" or dia_chi like "%Quảng Trị%");
+
+select ma_khach_hang,ho_ten from
+khach_hang 
+where khach_hang.ma_loai_khach=1;
+
 
 
