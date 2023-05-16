@@ -1,28 +1,31 @@
 create database manage_sales;
 use manage_sales;
-create table customer(
-cID int primary key auto_increment,
-cName varchar(45),
-cAge int
+CREATE TABLE customer (
+    cID INT PRIMARY KEY AUTO_INCREMENT,
+    cName VARCHAR(45),
+    cAge INT
 );
-create table order_product(
-oID int primary key auto_increment,
-cID int,
-foreign key(cID) references customer(cID),
-oDate date,
-oTotalPrice double
+CREATE TABLE order_product (
+    oID INT PRIMARY KEY AUTO_INCREMENT,
+    cID INT,
+    FOREIGN KEY (cID)
+        REFERENCES customer (cID),
+    oDate DATE,
+    oTotalPrice DOUBLE
 );
-create table product(
-pID int primary key auto_increment,
-pName varchar(45) not null,
-pPrice double not null
+CREATE TABLE product (
+    pID INT PRIMARY KEY AUTO_INCREMENT,
+    pName VARCHAR(45) NOT NULL,
+    pPrice DOUBLE NOT NULL
 );
 
-create table order_detail(
-oID int ,
-pID int ,
-primary key(oID,pID),
-foreign key(pID) references product(pID),
-foreign key(oID) references order_product(oID),
-odQTY varchar(45) not null
+CREATE TABLE order_detail (
+    oID INT,
+    pID INT,
+    PRIMARY KEY (oID , pID),
+    FOREIGN KEY (pID)
+        REFERENCES product (pID),
+    FOREIGN KEY (oID)
+        REFERENCES order_product (oID),
+    odQTY VARCHAR(45) NOT NULL
 )
