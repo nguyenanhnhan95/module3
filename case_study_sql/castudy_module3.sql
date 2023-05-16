@@ -1,110 +1,125 @@
 create database data_furama;
 use data_furama;
-create table vi_tri(
-ma_vi_tri int  primary key auto_increment,
-ten_vi_tri varchar(45)
+CREATE TABLE vi_tri (
+    ma_vi_tri INT PRIMARY KEY AUTO_INCREMENT,
+    ten_vi_tri VARCHAR(45)
 );
-create table trinh_do(
-ma_trinh_do int primary key auto_increment,
-ten_trinh_do varchar(45)
+CREATE TABLE trinh_do (
+    ma_trinh_do INT PRIMARY KEY AUTO_INCREMENT,
+    ten_trinh_do VARCHAR(45)
 );
-create table bo_phan(
-ma_bo_phan int  primary key auto_increment,
-ten_bo_phan varchar(45)
+CREATE TABLE bo_phan (
+    ma_bo_phan INT PRIMARY KEY AUTO_INCREMENT,
+    ten_bo_phan VARCHAR(45)
 );
-create table nhan_vien(
-ma_nhan_vien int  primary key auto_increment,
-ho_ten varchar(45) not null,
-ngay_sinh date not null,
-so_cmnd varchar(45) not null,
-luong double not null,
-so_dien_thoai varchar(45) not null,
-email varchar(45) ,
-dia_chi varchar(45) ,
-ma_vi_tri int ,
-foreign key(ma_vi_tri)  references vi_tri(ma_vi_tri) ,
-ma_trinh_do int ,
-foreign key(ma_trinh_do)  references trinh_do(ma_trinh_do),
-ma_bo_phan int ,
-foreign key(ma_bo_phan) references bo_phan(ma_bo_phan)
+CREATE TABLE nhan_vien (
+    ma_nhan_vien INT PRIMARY KEY AUTO_INCREMENT,
+    ho_ten VARCHAR(45) NOT NULL,
+    ngay_sinh DATE NOT NULL,
+    so_cmnd VARCHAR(45) NOT NULL,
+    luong DOUBLE NOT NULL,
+    so_dien_thoai VARCHAR(45) NOT NULL,
+    email VARCHAR(45),
+    dia_chi VARCHAR(45),
+    ma_vi_tri INT,
+    FOREIGN KEY (ma_vi_tri)
+        REFERENCES vi_tri (ma_vi_tri),
+    ma_trinh_do INT,
+    FOREIGN KEY (ma_trinh_do)
+        REFERENCES trinh_do (ma_trinh_do),
+    ma_bo_phan INT,
+    FOREIGN KEY (ma_bo_phan)
+        REFERENCES bo_phan (ma_bo_phan)
 );
 
-create table dich_vu_di_kem(
-ma_dich_vu_di_kem int primary key auto_increment,
-ten_dich_vu_di_kem varchar(45) not null,
-gia double not null,
-don_vi varchar(10) not null,
-trang_thai varchar(45)
+CREATE TABLE dich_vu_di_kem (
+    ma_dich_vu_di_kem INT PRIMARY KEY AUTO_INCREMENT,
+    ten_dich_vu_di_kem VARCHAR(45) NOT NULL,
+    gia DOUBLE NOT NULL,
+    don_vi VARCHAR(10) NOT NULL,
+    trang_thai VARCHAR(45)
 );
-create table loai_khach(
-ma_loai_khach int primary key auto_increment,
-ten_loai_khach varchar(45)
+CREATE TABLE loai_khach (
+    ma_loai_khach INT PRIMARY KEY AUTO_INCREMENT,
+    ten_loai_khach VARCHAR(45)
 );
-create table loai_dich_vu(
-ma_loai_dich_vu int primary key auto_increment,
-ten_loai_dich_vu varchar(45)
+CREATE TABLE loai_dich_vu (
+    ma_loai_dich_vu INT PRIMARY KEY AUTO_INCREMENT,
+    ten_loai_dich_vu VARCHAR(45)
 );
-create table kieu_thue(
-ma_kieu_thue int  primary key auto_increment,
-ten_kieu_thue varchar(45)
+CREATE TABLE kieu_thue (
+    ma_kieu_thue INT PRIMARY KEY AUTO_INCREMENT,
+    ten_kieu_thue VARCHAR(45)
 );
-create table dich_vu(
-ma_dich_vu int  primary key auto_increment,
-ten_dich_vu varchar(45) not null,
-dien_tich int,
-chi_phi_thue double not null,
-so_nguoi_toi_da int,
-tieu_chuan_phong varchar(45),
-mo_ta_tien_nghi_khac varchar(45),
-dien_tich_ho_boi double,
-so_tang int,
-ma_kieu_thue int,
-ma_loai_dich_vu int,
-foreign key(ma_kieu_thue) references kieu_thue(ma_kieu_thue),
-foreign key(ma_loai_dich_vu) references loai_dich_vu(ma_loai_dich_vu)
+CREATE TABLE dich_vu (
+    ma_dich_vu INT PRIMARY KEY AUTO_INCREMENT,
+    ten_dich_vu VARCHAR(45) NOT NULL,
+    dien_tich INT,
+    chi_phi_thue DOUBLE NOT NULL,
+    so_nguoi_toi_da INT,
+    tieu_chuan_phong VARCHAR(45),
+    mo_ta_tien_nghi_khac VARCHAR(45),
+    dien_tich_ho_boi DOUBLE,
+    so_tang INT,
+    ma_kieu_thue INT,
+    ma_loai_dich_vu INT,
+    FOREIGN KEY (ma_kieu_thue)
+        REFERENCES kieu_thue (ma_kieu_thue),
+    FOREIGN KEY (ma_loai_dich_vu)
+        REFERENCES loai_dich_vu (ma_loai_dich_vu)
 );
-create table khach_hang(
-ma_khach_hang int  primary key auto_increment,
-ho_ten varchar(45) not null,
-ngay_sinh date not null,
-gioi_tinh bit(1) not null,
-so_cmnd varchar(45) not null,
-so_dien_thoai varchar(45) not null,
-email varchar(45),
-dia_chi varchar(45),
-ma_loai_khach int,
-foreign key(ma_loai_khach) references loai_khach(ma_loai_khach)
+CREATE TABLE khach_hang (
+    ma_khach_hang INT PRIMARY KEY AUTO_INCREMENT,
+    ho_ten VARCHAR(45) NOT NULL,
+    ngay_sinh DATE NOT NULL,
+    gioi_tinh BIT(1) NOT NULL,
+    so_cmnd VARCHAR(45) NOT NULL,
+    so_dien_thoai VARCHAR(45) NOT NULL,
+    email VARCHAR(45),
+    dia_chi VARCHAR(45),
+    ma_loai_khach INT,
+    FOREIGN KEY (ma_loai_khach)
+        REFERENCES loai_khach (ma_loai_khach)
 );
-create table hop_dong(
-ma_hop_dong int  primary key auto_increment,
-ngay_lam_hop_dong datetime not null,
-ngay_ket_thuc datetime not null,
-tien_dat_coc double not null,
-ma_nhan_vien int ,
-foreign key(ma_nhan_vien) references nhan_vien(ma_nhan_vien),
-ma_khach_hang int ,
-foreign key(ma_khach_hang) references khach_hang(ma_khach_hang),
-ma_dich_vu int ,
-foreign key(ma_dich_vu) references dich_vu(ma_dich_vu)
+CREATE TABLE hop_dong (
+    ma_hop_dong INT PRIMARY KEY AUTO_INCREMENT,
+    ngay_lam_hop_dong DATETIME NOT NULL,
+    ngay_ket_thuc DATETIME NOT NULL,
+    tien_dat_coc DOUBLE NOT NULL,
+    ma_nhan_vien INT,
+    FOREIGN KEY (ma_nhan_vien)
+        REFERENCES nhan_vien (ma_nhan_vien),
+    ma_khach_hang INT,
+    FOREIGN KEY (ma_khach_hang)
+        REFERENCES khach_hang (ma_khach_hang),
+    ma_dich_vu INT,
+    FOREIGN KEY (ma_dich_vu)
+        REFERENCES dich_vu (ma_dich_vu)
 );
-create table hop_dong_chi_tiet(
-ma_hop_dong_chi_tiet int  primary key auto_increment,
-ma_hop_dong int,
-foreign key(ma_hop_dong)  references hop_dong(ma_hop_dong),
-so_luong int not null,
-ma_dich_vu_di_kem int,
-foreign key(ma_dich_vu_di_kem) references dich_vu_di_kem(ma_dich_vu_di_kem)
+CREATE TABLE hop_dong_chi_tiet (
+    ma_hop_dong_chi_tiet INT PRIMARY KEY AUTO_INCREMENT,
+    ma_hop_dong INT,
+    FOREIGN KEY (ma_hop_dong)
+        REFERENCES hop_dong (ma_hop_dong),
+    so_luong INT NOT NULL,
+    ma_dich_vu_di_kem INT,
+    FOREIGN KEY (ma_dich_vu_di_kem)
+        REFERENCES dich_vu_di_kem (ma_dich_vu_di_kem)
 );
 	
 
 insert into vi_tri(ten_vi_tri)
 value("Quản Lý"),("Nhân Viên");
+
 insert into trinh_do(ten_trinh_do)
 value("Trung Cấp"),("Cao Đẳng"),("Đại Học"),("Sau Đại Học");
+
 insert into bo_phan(ten_bo_phan)
 value ("Sale-Marketing"),("Hành chính"),("Phục vụ"),("Quản lý");
+
 insert into loai_khach(ten_loai_khach)
 value("Diamond"),("Platinium"),("Gold"),("Silver"),("Member");
+
 insert into nhan_vien(ho_ten,ngay_sinh,so_cmnd,luong,so_dien_thoai,email,dia_chi,ma_vi_tri,ma_trinh_do,ma_bo_phan)
 value
 	("Nguyễn Văn An",'1970-11-07',456231786,10000000,0901234121,"annguyen@gmail.com","295 Nguyễn Tất Thành, Đà Nẵng",1,3,1),
@@ -117,6 +132,7 @@ value
 	("Nguyễn Hà Đông",'1989-09-03',234414123,9000000,0642123111,"donghanguyen@gmail.com","111 Hùng Vương, Hà Nội",2,4,4),
 	("Tòng Hoang",'1982-09-03',256781231,6000000,0245144444,"hoangtong@gmail.com","213 Hàm Nghi, Đà Nẵng",2,4,4),
 	("Nguyễn Công Đạo",'1994-01-08',755434343,8000000,0988767111,"nguyencongdao12@gmail.com","6 Hoà Khánh, Đồng Nai",2,3,2);
+    
 insert into khach_hang(ho_ten,ngay_sinh,gioi_tinh,so_cmnd,so_dien_thoai,email,dia_chi,ma_loai_khach)
 value("Nguyễn Thị Hào",'1970-11-07',0,643431213,0945423362,"thihao07@gmail.com","23 Nguyễn Hoàng, Đà Nẵng",5),
 	("Phạm Xuân Diệu",'1992-08-08',1,865342123,0954333333,"xuandieu92@gmail.com","K77/22 Thái Phiên, Quảng Trị",3),
@@ -132,6 +148,7 @@ insert into kieu_thue(ten_kieu_thue)
 value("year"),("month"),("day"),("hour");
 insert into loai_dich_vu(ten_loai_dich_vu)
 value("Villa"),("House"),("Room");
+
 insert into dich_vu(ten_dich_vu,dien_tich,chi_phi_thue,so_nguoi_toi_da,tieu_chuan_phong,mo_ta_tien_nghi_khac,dien_tich_ho_boi,so_tang,ma_kieu_thue,ma_loai_dich_vu)
 value("Villa Beach Front",25000,10000000,10,"vip","Có hồ bơi",500,4,3,1),
 ("House Princess 01",14000,5000000,7,"vip","Có thêm bếp nướng",null,3,2,2),
@@ -139,6 +156,7 @@ value("Villa Beach Front",25000,10000000,10,"vip","Có hồ bơi",500,4,3,1),
 ("Villa No Beach Front",22000,9000000,8,"normal","Có hồ bơi",300,3,3,1),
 ("House Princess 02",10000,4000000,5,"normal","Có thêm bếp nướng",null,2,3,2),
 ("Room Twin 02",3000,900000,2,"normal","Có tivi",null,null,4,3);
+
 insert into dich_vu_di_kem(ten_dich_vu_di_kem,gia,don_vi,trang_thai)
 value("Karaoke",10000,"giờ","tiện nghi,hiện tại"),
 ("Thuê xe máy",10000,"chiếc","hỏng 1 xe"),	
@@ -146,6 +164,7 @@ value("Karaoke",10000,"giờ","tiện nghi,hiện tại"),
 ("Buffet buổi sáng",15000,"suất","đầy đủ đồ ăn, tráng miệng	"),
 ("Buffet buổi trưa",90000,"suất","đầy đủ đồ ăn, tráng miệng"),
 ("Buffet buổi tối",16000,"suất","đầy đủ đồ ăn, tráng miệng");
+
 insert into hop_dong(ngay_lam_hop_dong,ngay_ket_thuc,tien_dat_coc,ma_nhan_vien,ma_khach_hang,ma_dich_vu)
 value('2020-12-08','2020-12-08',0,3,1,3),
 	('2020-07-14','2020-07-21',200000,7,3,1),
@@ -162,19 +181,42 @@ value('2020-12-08','2020-12-08',0,3,1,3),
 insert into hop_dong_chi_tiet(ma_hop_dong,so_luong,ma_dich_vu_di_kem)
 value(2,5,4),(2,8,5),(2,15,6),(3,1,1),(3,11,2),(1,1,3),(1,2,2),(12,2,2);
 
-select * from nhan_vien
-where (substring_index(ho_ten," ",-1) like "H%" or 
-substring_index(ho_ten," ",-1) like "T%" or 
-substring_index(ho_ten," ",-1) like "K%")
-and (char_length(ho_ten)<16);
+SELECT 
+    *
+FROM
+    nhan_vien
+WHERE
+    (SUBSTRING_INDEX(ho_ten, ' ', - 1) LIKE 'H%'
+        OR SUBSTRING_INDEX(ho_ten, ' ', - 1) LIKE 'T%'
+        OR SUBSTRING_INDEX(ho_ten, ' ', - 1) LIKE 'K%')
+        AND (CHAR_LENGTH(ho_ten) < 16);
 
-select * from khach_hang
-where TIMESTAMPDIFF (YEAR,ngay_sinh, CURDATE())>18 and TIMESTAMPDIFF (YEAR,ngay_sinh, CURDATE())<50
-and( dia_chi like "%Đà Nẵng%" or dia_chi like "%Quảng Trị%");
+SELECT 
+    *
+FROM
+    khach_hang
+WHERE
+    TIMESTAMPDIFF(YEAR,
+        ngay_sinh,
+        CURDATE()) > 18
+        AND TIMESTAMPDIFF(YEAR,
+        ngay_sinh,
+        CURDATE()) < 50
+        AND (dia_chi LIKE '%Đà Nẵng%'
+        OR dia_chi LIKE '%Quảng Trị%');
 
-select ma_khach_hang,ho_ten from
-khach_hang 
-where khach_hang.ma_loai_khach=1;
+SELECT 
+    khach_hang.ma_khach_hang,
+    khach_hang.ho_ten,
+    COUNT(*) AS 'Số lần đặt '
+FROM
+    khach_hang
+        JOIN
+    hop_dong ON khach_hang.ma_khach_hang = hop_dong.ma_khach_hang
+WHERE
+    khach_hang.ma_loai_khach = 1
+GROUP BY ma_khach_hang
+ORDER BY COUNT(*);
 
 
 
