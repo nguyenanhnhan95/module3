@@ -410,12 +410,74 @@ SELECT
     dk.gia,
     dk.don_vi,
     dk.trang_thai,
-    SUM(ht.so_luong)
+    SUM(ht.so_luong) as "tong_so_luong"
 FROM
     dich_vu_di_kem dk
         JOIN
     hop_dong_chi_tiet ht ON ht.ma_dich_vu_di_kem = dk.ma_dich_vu_di_kem
         JOIN
     hop_dong hd ON hd.ma_hop_dong = ht.ma_hop_dong
-GROUP BY dk.ma_dich_vu_di_kem
-ORDER BY SUM(ht.so_luong) DESC;
+    group by ht.ma_dich_vu_di_kem
+having sum(ht.so_luong)  = (
+select sum(ht.so_luong) from
+    dich_vu_di_kem dk
+        JOIN
+    hop_dong_chi_tiet ht ON ht.ma_dich_vu_di_kem = dk.ma_dich_vu_di_kem
+        JOIN
+    hop_dong hd ON hd.ma_hop_dong = ht.ma_hop_dong
+    GROUP BY dk.ma_dich_vu_di_kem
+    ORDER BY SUM(ht.so_luong) DESC
+    limit 1
+);
+
+-- 14.	Hiển thị thông tin tất cả các Dịch vụ đi kèm chỉ mới được sử dụng một lần duy nhất. Thông tin hiển thị bao gồm ma_hop_dong, 
+-- ten_loai_dich_vu, ten_dich_vu_di_kem, so_lan_su_dung (được tính dựa trên việc count các ma_dich_vu_di_kem).
+
+SELECT hd.ma_hop_dong,lv.ten_loai_dich_vu,
+    dk.ten_dich_vu_di_kem,dk.ma_dich_vu_di_kem,COUNT(ht.ma_dich_vu_di_kem)
+FROM hop_dong hd 
+JOIN dich_vu dv ON dv.ma_dich_vu = hd.ma_dich_vu
+        JOIN
+    loai_dich_vu lv ON lv.ma_loai_dich_vu = dv.ma_loai_dich_vu
+        JOIN
+    hop_dong_chi_tiet ht ON ht.ma_hop_dong = hd.ma_hop_dong
+        JOIN
+    dich_vu_di_kem dk ON dk.ma_dich_vu_di_kem = ht.ma_dich_vu_di_kem
+GROUP BY ht.ma_dich_vu_di_kem
+HAVING COUNT(ht.ma_dich_vu_di_kem) = 1
+ORDER BY hd.ma_hop_dong;
+
+
+-- 15.	Hiển thi thông tin của tất cả nhân viên bao gồm ma_nhan_vien, ho_ten, ten_trinh_do, ten_bo_phan,
+--  so_dien_thoai, dia_chi mới chỉ lập được tối đa 3 hợp đồng từ năm 2020 đến 2021.
+
+SELECT 
+    nv.ma_nhan_vien,
+    td.ten_trinh_do,
+    nv.dia_chi,
+    bp.ten_bo_phan,
+    nv.so_dien_thoai,
+    COUNT(nv.ma_nhan_vien)
+FROM
+    nhan_vien nv
+        JOIN
+    trinh_do td ON td.ma_trinh_do = nv.ma_trinh_do
+        JOIN
+    bo_phan bp ON bp.ma_bo_phan = nv.ma_bo_phan
+        JOIN
+    hop_dong hd ON hd.ma_nhan_vien = nv.ma_nhan_vien
+WHERE
+    nv.ma_nhan_vien IN (SELECT 
+            nhan_vien.ma_nhan_vien
+        FROM
+            nhan_vien
+                JOIN
+            hop_dong ON hop_dong.ma_nhan_vien = nhan_vien.ma_nhan_vien
+        WHERE
+            YEAR(hop_dong.ngay_lam_hop_dong) = 2020
+                OR YEAR(hop_dong.ngay_lam_hop_dong) = 2021)
+GROUP BY nv.ma_nhan_vien
+HAVING COUNT(nv.ma_nhan_vien) < 4
+
+-- 16.	Xóa những Nhân viên chưa từng lập được hợp đồng nào từ năm 2019 đến năm 2021.
+

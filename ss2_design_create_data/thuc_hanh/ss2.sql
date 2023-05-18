@@ -101,5 +101,9 @@ inner join class on class.id=student.class_id
 where class.name='c1121g1'
 order by student.`name` asc;
 
+CREATE VIEW view_name AS
 
+SELECT student.`name`,student.id
+
+FROM student
 
