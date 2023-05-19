@@ -434,7 +434,7 @@ select sum(ht.so_luong) from
 -- ten_loai_dich_vu, ten_dich_vu_di_kem, so_lan_su_dung (được tính dựa trên việc count các ma_dich_vu_di_kem).
 
 SELECT hd.ma_hop_dong,lv.ten_loai_dich_vu,
-    dk.ten_dich_vu_di_kem,dk.ma_dich_vu_di_kem,COUNT(ht.ma_dich_vu_di_kem)
+    dk.ten_dich_vu_di_kem,dk.ma_dich_vu_di_kem
 FROM hop_dong hd 
 JOIN dich_vu dv ON dv.ma_dich_vu = hd.ma_dich_vu
         JOIN
@@ -443,9 +443,14 @@ JOIN dich_vu dv ON dv.ma_dich_vu = hd.ma_dich_vu
     hop_dong_chi_tiet ht ON ht.ma_hop_dong = hd.ma_hop_dong
         JOIN
     dich_vu_di_kem dk ON dk.ma_dich_vu_di_kem = ht.ma_dich_vu_di_kem
-GROUP BY ht.ma_dich_vu_di_kem
-HAVING COUNT(ht.ma_dich_vu_di_kem) = 1
-ORDER BY hd.ma_hop_dong;
+    where ht.ma_dich_vu_di_kem in (
+		select ht.ma_dich_vu_di_kem from
+			hop_dong_chi_tiet ht 
+			join dich_vu_di_kem dk on dk.ma_dich_vu_di_kem=ht.ma_dich_vu_di_kem
+			group by ht.ma_dich_vu_di_kem having
+			count(ht.ma_dich_vu_di_kem)=1
+		)
+		order by hd.ma_hop_dong;
 
 
 -- 15.	Hiển thi thông tin của tất cả nhân viên bao gồm ma_nhan_vien, ho_ten, ten_trinh_do, ten_bo_phan,
@@ -477,7 +482,137 @@ WHERE
             YEAR(hop_dong.ngay_lam_hop_dong) = 2020
                 OR YEAR(hop_dong.ngay_lam_hop_dong) = 2021)
 GROUP BY nv.ma_nhan_vien
-HAVING COUNT(nv.ma_nhan_vien) < 4
+HAVING COUNT(nv.ma_nhan_vien) < 4;
 
 -- 16.	Xóa những Nhân viên chưa từng lập được hợp đồng nào từ năm 2019 đến năm 2021.
+set sql_safe_updates = 0;
+	delete from 
+		nhan_vien  
+where nhan_vien.ma_nhan_vien not in (
+	select * from (
+		select nhan_vien.ma_nhan_vien
+			from nhan_vien 
+			join hop_dong hd on hd.ma_nhan_vien=nhan_vien.ma_nhan_vien
+				where year(hd.ngay_lam_hop_dong)>2018 and year(hd.ngay_lam_hop_dong)<2022)
+			as table_nhan_vien
+);
+
+-- 17.	Cập nhật thông tin những khách hàng có ten_loai_khach từ Platinum lên Diamond, 
+-- chỉ cập nhật những khách hàng đã từng đặt phòng với Tổng Tiền thanh toán trong năm 2021 là lớn hơn 10.000.000 VNĐ.
+
+update khach_hang
+set khach_hang.ma_loai_khach =1
+where khach_hang.ma_khach_hang in (
+select *from(
+select kh.ma_khach_hang
+from 
+	khach_hang kh 
+	join loai_khach lk on lk.ma_loai_khach=kh.ma_loai_khach
+	join hop_dong hd on hd.ma_khach_hang = kh.ma_khach_hang
+
+	join dich_vu dv on hd.ma_dich_vu = dv.ma_dich_vu
+
+	join hop_dong_chi_tiet hdct on hdct.ma_hop_dong = hd.ma_hop_dong
+
+	join dich_vu_di_kem dvdk on dvdk.ma_dich_vu_di_kem=hdct.ma_dich_vu_di_kem
+    
+		where year(hd.ngay_lam_hop_dong)=2021 and lk.ten_loai_khach ='Platinium'
+			group by kh.ma_khach_hang
+			having sum(dv.chi_phi_thue+ifnull(dvdk.gia*hdct.so_luong,0))>10000000
+			) as table_khach_hang
+) ;
+
+-- 18.	Xóa những khách hàng có hợp đồng trước năm 2021 (chú ý ràng buộc giữa các bảng).
+
+alter table khach_hang
+add is_delete int(1) default 1;
+
+set sql_safe_updates = 0;
+update khach_hang kh
+set
+	kh.is_delete =0
+where kh.ma_khach_hang  in (
+select *from (
+	select
+		khach_hang.ma_khach_hang from 
+		khach_hang
+	join hop_dong hd on hd.ma_khach_hang=khach_hang.ma_khach_hang
+	where year(hd.ngay_lam_hop_dong)<2021) as table_khach_hang
+);
+
+-- 19.	Cập nhật giá cho các dịch vụ đi kèm được sử dụng trên 10 lần trong năm 2020 lên gấp đôi.
+set sql_safe_updates = 0;
+update dich_vu_di_kem dvdk
+set dvdk.gia= dvdk.gia*2
+where dvdk.ma_dich_vu_di_kem in(
+select *from (
+	select hdct.ma_dich_vu_di_kem from 
+    dich_vu_di_kem dvdk
+		join hop_dong_chi_tiet hdct on hdct.ma_dich_vu_di_kem
+        
+		join hop_dong hd on hd.ma_hop_dong = hdct.ma_hop_dong
+        
+    where year(hd.ngay_lam_hop_dong)=2020 and hdct.so_luong>10
+		group by hdct.ma_dich_vu_di_kem
+		)
+			as table_dich_vu_di_kem
+);
+
+-- 20.	Hiển thị thông tin của tất cả các nhân viên và khách hàng có trong hệ thống, 
+-- thông tin hiển thị bao gồm id (ma_nhan_vien, ma_khach_hang), ho_ten, email, so_dien_thoai, ngay_sinh, dia_chi.
+select nv.ma_nhan_vien id,nv.ho_ten,nv.so_dien_thoai,nv.ngay_sinh,nv.dia_chi
+	from nhan_vien nv
+union
+select kh.ma_khach_hang,kh.ho_ten,kh.so_dien_thoai,kh.ngay_sinh,kh.dia_chi
+	from khach_hang kh;
+
+-- 21.	Tạo khung nhìn có tên là v_nhan_vien để lấy được thông tin của tất cả các nhân viên có địa chỉ là 
+-- “Hải Châu” và đã từng lập hợp đồng cho một hoặc nhiều khách hàng bất kì với ngày lập hợp đồng là “12/12/2019”.ma_vi_tri
+create view v_nhan_vien(ho_ten,ngay_sinh,so_cmnd,luong,so_dien_thoai,email,dia_chi,ma_vi_tri,ma_trinh_do,ma_bo_phan) as
+select ho_ten,ngay_sinh,so_cmnd,luong,so_dien_thoai,email,dia_chi,ma_vi_tri,ma_trinh_do,ma_bo_phan
+from nhan_vien nv
+join hop_dong hd on hd.ma_nhan_vien = nv.ma_nhan_vien
+where nv.dia_chi='4 Nguyễn Chí Thanh, Huế' and hd.ngay_lam_hop_dong= '2021-06-01';
+
+select *from v_nhan_vien;
+
+-- 23.	Tạo Stored Procedure sp_xoa_khach_hang dùng để xóa thông tin của một khách hàng nào đó với 
+-- ma_khach_hang được truyền vào như là 1 tham số của sp_xoa_khach_hang.
+
+DELIMITER //
+CREATE PROCEDURE sp_xoa_khach_hang( ma_khach_hang int )
+BEGIN 
+	update khach_hang
+    set khach_hang.is_delete=0
+    where khach_hang.ma_khach_hang=ma_khach_hang;
+END //
+DELIMITER ;
+
+call sp_xoa_khach_hang(3);
+
+-- 24.	Tạo Stored Procedure sp_them_moi_hop_dong dùng để thêm mới vào bảng hop_dong với 
+-- yêu cầu sp_them_moi_hop_dong phải thực hiện kiểm tra tính hợp lệ của dữ liệu bổ sung,
+--  với nguyên tắc không được trùng khóa chính và đảm bảo toàn vẹn tham chiếu đến các bảng liên quan.
+
+DELIMITER //
+CREATE procedure sp_them_moi_hop_dong(ngay_lam_hop_dong datetime,ngay_ket_thuc datetime ,tien_dat_coc double,ma_nhan_vien int,ma_khach_hang int ,ma_dich_vu int)
+begin
+IF ma_nhan_vien not in (select nhan_vien.ma_nhan_vien from nhan_vien)
+then SIGNAL SQLSTATE '45000'
+      SET MESSAGE_TEXT = 'Mã nhân viên không tồn tai mã hơp đồng';
+      END IF;
+      if ma_khach_hang not in (select nhan_vien.ma_nhan_vien from nhan_vien)
+then SIGNAL SQLSTATE '45000'
+      SET MESSAGE_TEXT = 'Mã khách hàng không tồn tai mã hơp đồng';
+      END IF;
+      if ma_dich_vu not in (select dich_vu.ma_dich_vu from dich_vu)
+then SIGNAL SQLSTATE '45000'
+      SET MESSAGE_TEXT = 'Mã dịch vụ không tồn tai mã hơp đồng';
+      END IF;
+      insert into hop_dong(ngay_lam_hop_dong,ngay_ket_thuc,tien_dat_coc,ma_nhan_vien,ma_khach_hang,ma_dich_vu)
+      value (ngay_lam_hop_dong,ngay_ket_thuc,tien_dat_coc,ma_nhan_vien,ma_khach_hang,ma_dich_vu);
+END //
+DELIMITER ;
+
+call sp_them_moi_hop_dong('2020-04-15','2020-05-01',200000,10,5,5)
 
