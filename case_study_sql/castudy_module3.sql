@@ -614,5 +614,36 @@ then SIGNAL SQLSTATE '45000'
 END //
 DELIMITER ;
 
-call sp_them_moi_hop_dong('2020-04-15','2020-05-01',200000,10,5,5)
+call sp_them_moi_hop_dong('2020-04-15','2020-05-01',200000,10,5,5);
 
+-- 25.	Tạo Trigger có tên tr_xoa_hop_dong khi xóa bản ghi trong bảng hop_dong thì hiển thị 
+-- tổng số lượng bản ghi còn lại có trong bảng hop_dong ra giao diện console của database.
+alter table hop_dong
+add is_delete int(1) default 1;
+
+
+create table `xoa_hop_dong`(
+id int auto_increment primary key,
+old_is_delete int,
+new_is_delete int,
+update_day datetime
+);
+
+DELIMITER //
+CREATE TRIGGER tr_xoa_hop_dong
+AFTER UPDATE ON hop_dong
+FOR EACH ROW
+BEGIN
+declare toltal_delete int;
+select count(*) into toltal_delete from hop_dong
+where hop_dong.is_delete = 0
+group by hop_dong.is_delete;
+insert into `xoa_hop_dong`(old_is_delete,new_is_delete,update_day)
+values (old.is_delete,new.is_delete,now());
+END //
+DELIMITER ;
+drop trigger tr_xoa_hop_dong;
+select *from xoa_hop_dong;
+update hop_dong
+set hop_dong.is_delete=0
+where hop_dong.ma_hop_dong=1;

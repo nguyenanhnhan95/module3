@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link rel="stylesheet" href="../../bootstrap-5.1.3-dist/css/bootstrap.css">
+    <style>
+        body{
+            margin: 0;
+        }
+        .container{
+            width : 100vw;
+            height : 100vh;
+            font-family: 'Quicksand',sans-serif;
+            font-size: 20px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: 50px 50px 1fr 1fr 50px ;
+            gap : 10px;
+            box-sizing: border-box;
+        }
+        .container div{
+            padding: 10px;
+        }
+        .header {
+            grid-column-start: 1;
+            grid-column-end: 3;
+            background-color: black;
+            color: white;
+        }
+        .nav {
+            grid-column-start: 1;
+            grid-column-end: 3;
+            grid-row-start: 2 ;
+            grid-row-end: 3 ;
+            background-color: white;
+        }
+        .nav ul li{
+            display: inline;
+        }
+        .section{
+            grid-column-start: 1;
+            grid-column-end: 2;
+            background-color: gray;
+        }
+        .article{
+            grid-column-start: 1;
+            grid-column-end: 2;
+            background-color: gray;
+        }
+        .aside{
+            grid-row: 3/5;
+            grid-column-start: 2;
+            grid-column-end: 3;
+            background-color: gray;
+        }
+        .footer{
+            grid-row: 5/6;
+            grid-column: 1/3;
+            font-size: 14px;
+            background-color: black;
+            color: white;
+            padding: 50px;
+        }
+        p{
+            background-color: white;
+        }
+    </style>
+</head>
+<body >
+<div class="container">
+<div class="header">
+    <h1>Monday Times</h1>
+</div>
+    <div class="nav">
+        <ul>
+            <li>News</li>
+            <li>Sports</li>
+            <li>Weather</li>
+        </ul>
+    </div>
+    <div class="section">
+        <h2>News Section</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in porta lorem. Morbi condimentum est nibh, et consectetur tortor feugiat at.</p>
+    </div>
+    <div class="article">
+        <h2>News Article</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in porta lorem. Morbi condimentum est nibh, et consectetur tortor feugiat at.</p>
+    </div>
+    <div class="aside">aside</div>
+    <div class="footer">
+        <a>&copy; 2014 Monday Times. All rights reserved.</a>
+    </div>
+</div>
+</body>
+</html>
