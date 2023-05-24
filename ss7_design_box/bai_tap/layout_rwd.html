@@ -4,35 +4,179 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
-       .row{
-           display: flex;
-       }
-        .col-1 {width: 8.33%;}
-        .col-2 {width: 16.66%;}
-        .col-3 {width: 25%;}
-        .col-4 {width: 33.33%;}
-        .col-5 {width: 41.66%;}
-        .col-6 {width: 50%;}
-        .col-7 {width: 58.33%;}
-        .col-8 {width: 66.66%;}
-        .col-9 {width: 75%;}
-        .col-10 {width: 83.33%;}
-        .col-11 {width: 91.66%;}
-        .col-12 {width: 100%;}
+        *{
+            margin: 0;
+        }
+        .row {
+            display: flex;
+        }
+        .head{
+            height: 100px;
+            align-items: center;
+            background-color: black;
+            padding-left: 30px;
+        }
+        .head .col-1 i{
+            color: white;
+        }
+        .head a{
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .content{
+            height: 700px;
+        }
+        .content .col-3{
+            background-color:lightgray ;
+        }
+        .content .left{
+            align-items: center;
+            text-align: center;
+            color: #0a53be;
+            font-size: 20px;
+        }
+        li{
+            padding-top: 50px;
+        }
+        .content .left ul{
+            list-style: none;
+        }
+        .content .col-6{
+            background-color:white ;
+        }
+        h2{
+            padding-top: 30px;
+            padding-bottom: 30px;
+        }
+        .content .right{
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .sharp{
+            width: 80%;
+            height: 50px;
+            border:1px solid black;
+            margin: 10% 15%;
+            text-align: center;
+            padding-top: 10%;
+        }
+        .footer{
+            background-color: black;
+            height: 100px;
+            align-items: center;
+            text-align: center;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .col-1 {
+            width: 8.33%;
+        }
+
+        .col-2 {
+            width: 16.66%;
+        }
+
+        .col-3 {
+            width: 25%;
+        }
+
+        .col-4 {
+            width: 33.33%;
+        }
+
+        .col-5 {
+            width: 41.66%;
+        }
+
+        .col-6 {
+            width: 50%;
+        }
+
+        .col-7 {
+            width: 58.33%;
+        }
+
+        .col-8 {
+            width: 66.66%;
+        }
+
+        .col-9 {
+            width: 75%;
+        }
+
+        .col-10 {
+            width: 83.33%;
+        }
+
+        .col-11 {
+            width: 91.66%;
+        }
+
+        .col-12 {
+            width: 100%;
+        }
 
     </style>
 </head>
 <body>
 <div class="row head">
+    <div class="col-1">
+        <a>Logo</a>
+    </div>
+    <div class="col-1">
+        <a>Home</a>
+    </div>
+    <div class="col-1">
+        <a>About</a>
+    </div>
+    <div class="col-1">
+        <a>Projects</a>
+    </div>
+    <div class="col-1">
+        <a>Contact</a>
+    </div>
+    <div class="col-6">
 
+    </div>
+    <div class="col-1">
+        <i class="fa-solid fa-right-to-bracket">Login</i>
+    </div>
 </div>
 <div class="row content">
-
+    <div class="col-3 left">
+        <ul>
+            <li>Link</li>
+            <li>Link</li>
+            <li>Link</li>
+        </ul>
+    </div>
+    <div class="col-6">
+        <h2>Welcome</h2>
+        <p style="font-size: 20px;padding-bottom: 50px">Lorem ipsum dolor sit amet, consectetur adpiscing elit, sed do eiusmod tempor incididunt
+            ut labore et dolore maana aliqua. Ut enim veniam, quis nostrud exer citation ullamco labors nisi ut
+            aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui offcia
+            deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt unt labore et
+            dolore magna aliqua. Ut enium ad minim veniam, quis nostud exercitation ullamco laboris nisit ut aliquip
+            exea commodo consequat.</p>
+        <hr>
+        <h2>Test</h2>
+        <p style="font-size: 20px;">Lorem ipsum</p>
+    </div>
+    <div class="col-3 right">
+        <div class="sharp">ADS</div>
+        <div class="sharp">ADS</div>
+    </div>
 </div>
 <div class="row footer">
-
+    <div class="col-12">
+      Footer Text
+    </div>
 </div>
 
 <div class=""></div>
+<script src="https://kit.fontawesome.com/4bf93b0ca4.js" crossorigin="anonymous"></script>
 </body>
 </html>
