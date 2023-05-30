@@ -20,7 +20,7 @@ public class CustomerServlet extends HttpServlet {
         listCustomer = new ArrayList<>();
         listCustomer = customerService.displayList();
         request.setAttribute("list", listCustomer);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("DisplayCustomer.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("display-customer.jsp");
         requestDispatcher.forward(request, response);
     }
 

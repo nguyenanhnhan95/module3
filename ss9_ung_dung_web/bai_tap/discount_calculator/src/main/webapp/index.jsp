@@ -5,9 +5,9 @@
     <title>JSP - Hello World</title>
 </head>
 <body>
-<form method="post" action="/DiscountServlet">
+<form method="post" action="/ProductServlet">
     <label>Product Description
-        <input type="text"  name="product_description">
+        <input type="text" name="product_description">
     </label>
     <label>List Price
         <input type="text" name="list_price">
@@ -15,7 +15,7 @@
     <label>Discount Percent
         <input type="text" name="discount_percent">
     </label>
-    <input type="submit"  value="Calculator Discount">
+    <input type="submit" value="Calculator Discount">
 </form>
 </body>
 </html>

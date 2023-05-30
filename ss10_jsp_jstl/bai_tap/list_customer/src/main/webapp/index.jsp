@@ -5,9 +5,6 @@
     <title>JSP - Hello World</title>
 </head>
 <body>
-<h1><%= "Hello World!" %>
-</h1>
-<br/>
-<a href="CustomerServlet">Hello Servlet</a>
+<a href="CustomerServlet">Thông Tin Khách Hàng</a>
 </body>
 </html>

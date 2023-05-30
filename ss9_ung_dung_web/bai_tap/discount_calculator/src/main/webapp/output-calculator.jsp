@@ -12,7 +12,9 @@
 </head>
 <body>
 Product : ${product}
+<br>
 Discount Amount : ${amount}
+<br>
 Discount Price : ${discount_price}
 </body>
 </html>
