@@ -17,10 +17,11 @@ public class CalculatorServlet extends HttpServlet {
         String math = request.getParameter("math");
         try {
             calculator.calculate(math, numberA, numberB);
+            request.setAttribute("result", calculator.calculate(math, numberA, numberB));
         } catch (Exception e) {
-            message = e.getMessage();
+            e.printStackTrace();
+            message = "Bạn nhập lỗi :";
         }
-        request.setAttribute("result", calculator.calculate(math, numberA, numberB));
         request.setAttribute("error", message);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("ResultMath.jsp");
         requestDispatcher.forward(request, response);

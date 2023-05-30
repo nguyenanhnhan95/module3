@@ -16,7 +16,7 @@ Kết Quả Tính Toán
     ${result}
 </c:if>
 <c:if test="${message != null}">
-    ${message}
+    ${error}
 </c:if>
 </body>
 </html>
