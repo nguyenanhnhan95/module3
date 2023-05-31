@@ -14,38 +14,6 @@
 
 </head>
 <body>
-<%--<form method="post" action="/ProductServlet?action=create" id="add-product">--%>
-<%--    <table>--%>
-<%--        <tr>--%>
-<%--            <lable for="id-lable">id--%>
-<%--                <input type="name" name="id" id="id-lable">--%>
-<%--            </lable>--%>
-<%--        </tr>--%>
-<%--        <tr>--%>
-<%--            <lable for="name-lable">--%>
-<%--                <input type="name" name="name" id="name-lable">--%>
-<%--            </lable>--%>
-<%--        </tr>--%>
-<%--        <tr>--%>
-<%--            <lable for="price-lable">--%>
-<%--                <input type="name" name="price" id="price-lable">--%>
-<%--            </lable>--%>
-<%--        </tr>--%>
-<%--        <tr>--%>
-<%--            <lable for="description-lable">--%>
-<%--                <input type="name" name="description" id="description-lable">--%>
-<%--            </lable>--%>
-<%--        </tr>--%>
-<%--        <tr>--%>
-<%--            <lable for="manufacture-lable">--%>
-<%--                <input type="name" name="manufacture" id="manufacture-lable">--%>
-<%--            </lable>--%>
-<%--        </tr>--%>
-<%--        <tr>--%>
-<%--            <input type="submit" form="add-product"  value="Add New Product">--%>
-<%--        </tr>--%>
-<%--    </table>--%>
-<%--</form>--%>
 <form method="post" action="/ProductServlet?action=create" id="add-product">
     <fieldset>
         <legend>New Product</legend>

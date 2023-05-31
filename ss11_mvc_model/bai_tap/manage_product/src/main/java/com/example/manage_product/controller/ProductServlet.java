@@ -68,7 +68,6 @@ public class ProductServlet extends HttpServlet {
                 }
                 break;
             case "delete":
-                deleteProduct(request, response);
                 break;
             case "view":
                 showProduct(request, response);
@@ -131,10 +130,6 @@ public class ProductServlet extends HttpServlet {
         productService.deleteProduct(id);
     }
 
-    private void deleteProduct(HttpServletRequest request, HttpServletResponse response) {
-
-    }
-
     private void createProductNew(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
@@ -161,23 +156,5 @@ public class ProductServlet extends HttpServlet {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("add-product.jsp");
         requestDispatcher.forward(request, response);
     }
-
-//    private void addProductNew(HttpServletRequest request,HttpServletResponse response){
-//        int id = Integer.parseInt(request.getParameter("id"));
-//        String name = request.getParameter("name");
-//        double price = Double.parseDouble(request.getParameter("price"));
-//        String description = request.getParameter("description");
-//        String manufacture = request.getParameter("manufacture");
-//        Product product = new Product(id,name,price,description,manufacture);
-//        productService.save(product);
-//        request.setAttribute("message-add","New product was add");
-//        RequestDispatcher requestDispatcher = request.getRequestDispatcher("add-product.jsp");
-//        try {
-//            requestDispatcher.forward(request,response);
-//        } catch (ServletException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    
 }
