@@ -1,6 +1,6 @@
 package com.example.list_custome.service;
 
-import com.example.list_custome.modal.Customer;
+import com.example.list_custome.model.Customer;
 
 import java.util.List;
 

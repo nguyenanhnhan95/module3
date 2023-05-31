@@ -1,4 +1,4 @@
-package com.example.list_custome.modal;
+package com.example.list_custome.model;
 
 import java.time.LocalDate;
 
