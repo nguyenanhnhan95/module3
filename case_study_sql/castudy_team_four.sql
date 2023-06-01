@@ -132,16 +132,14 @@ CREATE procedure add_customer(user_name VARCHAR(50), password_account VARCHAR(50
 begin
  DECLARE customer_id INT;
  SET customer_id = confirm_login(user_name , password_account );
- IF customer_id is not  null 
+ IF customer_id is  null 
  THEN 
  insert into account_users(user_name,`password`)
- value ("abcdef","123456")
- 
- ELSE
- SIGNAL SQLSTATE '45000'
-      SET MESSAGE_TEXT = 'Đăng nhập không phù hợp ';
-      END IF;
+ value (user_name,password_account);
+ insert into customers(customer_name,email,phone_number,address,account_id)
+ value (customer_name,email,phone_number,address,last_insert_id());
+ end if;
 END //
 DELIMITER ;
 
-
+call add_customer("sangid","12345678","sang","sang@gmail.com","0798654287","Hoa Khach")

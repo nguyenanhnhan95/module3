@@ -156,5 +156,5 @@ public class ProductServlet extends HttpServlet {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("add-product.jsp");
         requestDispatcher.forward(request, response);
     }
-    
+
 }
