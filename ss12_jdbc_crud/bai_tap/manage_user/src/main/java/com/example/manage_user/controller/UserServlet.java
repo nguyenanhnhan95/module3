@@ -22,12 +22,12 @@ public class UserServlet extends HttpServlet {
         }
         switch (action) {
             case "create":
-                clickAddUser(request, response);
+                showAddForm(request, response);
                 break;
             case "edit":
                 break;
             case "delete":
-                deleteUser(request, response);
+                delete(request, response);
                 break;
             case "find_country":
                 break;
@@ -45,12 +45,13 @@ public class UserServlet extends HttpServlet {
         }
         switch (action) {
             case "create":
-                addFormUser(request, response);
+                save(request, response);
                 break;
             case "edit":
+                update(request, response);
                 break;
             case "delete":
-                deleteUser(request, response);
+                delete(request, response);
                 break;
             case "find_country":
                 findByCountry(request, response);
@@ -60,7 +61,22 @@ public class UserServlet extends HttpServlet {
         }
     }
 
-    private void addFormUser(HttpServletRequest request, HttpServletResponse response) {
+    private void update(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        System.out.println(id);
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String country = request.getParameter("country");
+        User user = new User(id, name, email, country);
+        userService.editUser(user);
+        try {
+            response.sendRedirect("/UserServlet");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void save(HttpServletRequest request, HttpServletResponse response) {
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         String country = request.getParameter("country");
@@ -73,8 +89,8 @@ public class UserServlet extends HttpServlet {
         }
     }
 
-    private void clickAddUser(HttpServletRequest request, HttpServletResponse response) {
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("add-user.jsp");
+    private void showAddForm(HttpServletRequest request, HttpServletResponse response) {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("create.jsp");
         try {
             requestDispatcher.forward(request, response);
         } catch (ServletException e) {
@@ -84,7 +100,7 @@ public class UserServlet extends HttpServlet {
         }
     }
 
-    private void deleteUser(HttpServletRequest request, HttpServletResponse response) {
+    private void delete(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
         System.out.println(id);
         boolean confirmDelete = userService.deleteUser(id);
@@ -101,7 +117,7 @@ public class UserServlet extends HttpServlet {
         System.out.println(country);
         User user = userService.findUserByCountry(country);
         request.setAttribute("user", user);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("show-search.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("search.jsp");
         try {
             requestDispatcher.forward(request, response);
         } catch (ServletException e) {
@@ -115,7 +131,7 @@ public class UserServlet extends HttpServlet {
         List<User> userList = new ArrayList<>();
         userList = userService.findAllUser();
         request.setAttribute("list_user", userList);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("list-user.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("list.jsp");
         try {
             requestDispatcher.forward(request, response);
         } catch (ServletException e) {

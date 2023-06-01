@@ -12,7 +12,7 @@
     <title>Title</title>
 </head>
 <body>
-Thông tin sản phẩm $
+Thông tin người dùng  :
 <c:if test="${user!=null}">
     ID : ${user.getId()}<br>
     Name : ${user.getName()}<br>

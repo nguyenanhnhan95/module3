@@ -30,7 +30,7 @@
         </form>
     </div>
 </div>
-<table class="table">
+<table class="table" id="tableUser">
     <thead>
     <tr>
         <th scope="col">ID</th>
@@ -48,21 +48,23 @@
             <td><c:out value="${user.email}"/></td>
             <td><c:out value="${user.country}"/></td>
             <td>
-                <a href="/UserServlet?action=edit&id=${user.id}">Edit</a>
+                <button onclick="editUser('${user.id}','${user.name}')" data-bs-toggle="modal"
+                        data-bs-target="#editModal">Edit
+                </button>
                 <button onclick="deleteUser('${user.id}','${user.name}')" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal">Delete
+                        data-bs-target="#deleteModal">Delete
                 </button>
             </td>
         </tr>
     </c:forEach>
     </tbody>
 </table>
-<div class="modal" tabindex="-1" role="dialog" id="exampleModal">
+<div class="modal" tabindex="-1" role="dialog" id="deleteModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Xóa người dùng :</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </button>
             </div>
             <div class="modal-body">
@@ -79,16 +81,62 @@
         </div>
     </div>
 </div>
+<div class="modal" tabindex="-1" role="dialog" id="editModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Chỉnh sửa thông tin người dùng :</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h4>Nhập thông tin thay đổi <span id="nameEdit">:</span></h4>
+            </div>
+            <div class="modal-footer row">
+                <form action="/UserServlet?action=edit" method="post">
+                    <input type="hidden" name="id" id="idEdit" value="">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="name" class="form-control" id="name" name="name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="name" class="form-control" id="email" name="email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="country" class="form-label">Country</label>
+                        <input type="name" class="form-control" id="country" name="country">
+                    </div>
+                    <button type="submit" class="btn btn-primary ms-0">Save Change</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="https://kit.fontawesome.com/4bf93b0ca4.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
+<script src="jquery/jquery-3.5.1.min.js"></script>
+<script src="datatables/js/jquery.dataTables.min.js"></script>
+<script src="datatables/js/dataTables.bootstrap5.min.js"></script>
 <script>
+    $(document).ready(function () {
+        $('#tableUser').dataTable({
+            "dom": 'lrtip',
+            "lengthChange": false,
+            "pageLength": 3
+        });
+    });
 
     function deleteUser(id, name) {
         document.getElementById("nameDelete").innerText = name;
         document.getElementById("idDelete").value = id;
+    }
 
+    function editUser(id, name) {
+        document.getElementById("nameEdit").innerText = name;
+        document.getElementById("idEdit").value = id;
     }
 </script>
 </body>

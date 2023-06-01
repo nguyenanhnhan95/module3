@@ -15,6 +15,11 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public List<User> listSortName() {
+        return userRepository.getListSort();
+    }
+
+    @Override
     public User findUserByCountry(String country) {
         return userRepository.getByCountry(country);
     }
@@ -27,5 +32,10 @@ public class UserService implements IUserService {
     @Override
     public boolean deleteUser(int id) {
         return userRepository.deleteUser(id);
+    }
+
+    @Override
+    public void editUser(User user) {
+        userRepository.editUser(user);
     }
 }

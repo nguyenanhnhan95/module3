@@ -9,7 +9,12 @@ public interface IUserRepository {
 
     List<User> getList();
 
+    List<User> getListSort();
+
     User getByCountry(String country);
 
     boolean deleteUser(int id);
+
+    void editUser(User user);
+
 }

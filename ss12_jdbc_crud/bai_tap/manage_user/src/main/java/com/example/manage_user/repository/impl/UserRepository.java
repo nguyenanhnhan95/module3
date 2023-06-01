@@ -15,6 +15,8 @@ public class UserRepository implements IUserRepository {
     private static final String SELECT_USER = "SELECT * from users";
     private static final String SELECT_USER_COUNTRY = "SELECT * from users where country like ?";
     private static final String DELETE_USER = "DELETE  FROM users where id like ?";
+    private static final String UPDATE_USER = "UPDATE  users set name=?,email=?,country=? where id=?";
+    private static final String SORT_BY_NAME = "SELECT * FROM users ORDER BY name";
 
     @Override
     public void addUser(User user) {
@@ -43,6 +45,32 @@ public class UserRepository implements IUserRepository {
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(SELECT_USER);
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String email = resultSet.getString("email");
+                String country = resultSet.getString("country");
+                userList.add(new User(id, name, email, country));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return userList;
+    }
+
+    @Override
+    public List<User> getListSort() {
+        List<User> userList = new ArrayList<>();
+        Connection connection = baseRepository.getConnection();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(SORT_BY_NAME);
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
@@ -101,5 +129,26 @@ public class UserRepository implements IUserRepository {
             throwables.printStackTrace();
         }
         return rowDelete;
+    }
+
+    @Override
+    public void editUser(User user) {
+        Connection connection = baseRepository.getConnection();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_USER);
+            preparedStatement.setString(1, user.getName());
+            preparedStatement.setString(2, user.getEmail());
+            preparedStatement.setString(3, user.getCountry());
+            preparedStatement.setInt(4, user.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
