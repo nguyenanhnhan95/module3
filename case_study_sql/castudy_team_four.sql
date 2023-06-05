@@ -5,25 +5,31 @@ CREATE TABLE roles (
     role_name VARCHAR(50) NOT NULL
 );
 CREATE TABLE account_users(
-	account_id INT PRIMARY KEY AUTO_INCREMENT,
-    user_name VARCHAR(50) UNIQUE NOT NULL,
+	email_user varchar(50) PRIMARY KEY unique,
     `password` VARCHAR(50) NOT NULL
 );
 CREATE TABLE users_role (
 	role_id INT,
-    account_id INT,
-    PRIMARY KEY(role_id, account_id),
+    email_user varchar(50),
+    PRIMARY KEY(role_id,email_user),
     FOREIGN KEY (role_id) REFERENCES roles(role_id),
-    FOREIGN KEY(account_id) REFERENCES account_users(account_id)
+    FOREIGN KEY (email_user) REFERENCES account_users(email_user)
 );
 CREATE TABLE customers(
 	customer_id INT PRIMARY KEY AUTO_INCREMENT,
     customer_name VARCHAR(50) NOT NULL,
-    email VARCHAR(50) UNIQUE NOT NULL,
     phone_number VARCHAR(11) UNIQUE NOT NULL,
     address TEXT NOT NULL,
-    account_id INT,
-     FOREIGN KEY (account_id) REFERENCES account_users(account_id)
+    email_user varchar(50),
+     FOREIGN KEY (email_user) REFERENCES account_users(email_user)
+    );
+    CREATE TABLE employee(
+	employee_id INT PRIMARY KEY AUTO_INCREMENT,
+    employee_name VARCHAR(50) NOT NULL,
+    phone_number VARCHAR(11) UNIQUE NOT NULL,
+    address TEXT NOT NULL,
+    email_user varchar(50),
+     FOREIGN KEY (email_user) REFERENCES account_users(email_user)
     );
 CREATE TABLE products(
 	product_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -35,39 +41,44 @@ CREATE TABLE products(
 CREATE TABLE `order`(
 	order_id INT PRIMARY KEY AUTO_INCREMENT,
     order_date DATETIME,
-    customer_id INT,
-    FOREIGN KEY(customer_id) REFERENCES customers(customer_id)
+	customer_id int,
+	FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
 );
 CREATE TABLE order_detail(
 	order_detail_id INT PRIMARY KEY AUTO_INCREMENT,
     order_id INT,
     FOREIGN KEY(order_id) REFERENCES `order`(order_id),
     product_id int,
-        FOREIGN KEY(product_id) REFERENCES products(product_id),
-        quanlity int,
-        price double
+	FOREIGN KEY(product_id) REFERENCES products(product_id),
+	quanlity int,
+	price double
 );
 insert into roles(role_name)
 value ("nhân viên"),("khách hàng");
-insert into account_users(user_name,password)
-value ("abc","123"),
-("acbd","1234"),
-("xyz","987"),
-("bcd","456");
-insert into users_role
-value (1,1),(2,2),(2,3),(2,4);
-insert into customers(customer_name,email,phone_number,address,account_id)
-values ("Hạnh","hanh@gamil.com","0987654321","Đà Nẵng",1),
- ("Nhàn","nhan@gamil.com","0987654345","Đà Nẵng",2),
- ("Kiệt","kiet@gamil.com","0987654324","Đà Nẵng",3),
- ("Huy","huy@gamil.com","0987654326","Đà Nẵng",4);
+insert into account_users(email_user,password)
+value ("hanh@gamil.com","123"),
+("chanh@gamil.com","1234"),
+("nhan@gamil.com","987"),
+("trung@gamil.com","456"),
+("kiet@gamil.com","45678"),
+("huy@gamil.com","4567896");
+insert into users_role(role_id,email_user)
+value (2,"hanh@gamil.com"),(1,"chanh@gamil.com"),(2,"nhan@gamil.com"),(1,"trung@gamil.com"),(1,"kiet@gamil.com"),(1,"huy@gamil.com");
+insert into customers(customer_name,phone_number,address,email_user)
+values ("Hạnh","0987654321","Đà Nẵng","hanh@gamil.com"),
+ ("Nhàn","0987654345","Đà Nẵng","nhan@gamil.com"),
+ ("Kiệt","0987654324","Đà Nẵng","kiet@gamil.com"),
+ ("Huy","0987654326","Đà Nẵng","huy@gamil.com");
+ insert into employee(employee_name,phone_number,address,email_user)
+values ("trung","0987654581","Đà Nẵng","chanh@gamil.com"),
+ ("chanh","0987654312","Đà Nẵng","trung@gamil.com");
 insert into products(product_name,price,`describe`,product_image)
 value ("Áo 1",10,"New","Ảnh 1"),
  ("Áo 2",20,"New hoodie","Ảnh 2"),
  ("Áo 3",30,"New nike","Ảnh 3"),
  ("Áo 4",40,"New adidas","Ảnh 4");
 insert into `order`(order_date,customer_id)
-value (20230303,1),(20230404,2);
+value (20230303,5),(20230404,6);
 
 DELIMITER //
 
@@ -142,4 +153,17 @@ begin
 END //
 DELIMITER ;
 
-call add_customer("sangid","12345678","sang","sang@gmail.com","0798654287","Hoa Khach")
+call add_customer("sangid","12345678","sang","sang@gmail.com","0798654287","Hoa Khach");
+
+alter table customers
+add is_delete int(1) default 0;
+
+DELIMITER $$
+CREATE PROCEDURE find_customer(customer_name varchar(45),customer_address varchar(45))
+BEGIN
+select *from customers
+where customers.address like customer_address and customers.customer_name=customer_name;
+END $$
+DELIMITER ;
+
+CALL find_customer("Kiệt","Đà Nẵng")

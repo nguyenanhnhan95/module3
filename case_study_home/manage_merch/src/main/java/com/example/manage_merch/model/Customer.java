@@ -6,20 +6,33 @@ public class Customer {
     private String email;
     private String phone;
     private String address;
-    private String account;
-    private String password;
+    private AccountUser accountUser;
 
     public Customer() {
     }
 
-    public Customer(int id, String name, String email, String phone, String address, String account, String password) {
+    public Customer(int id, String name, String email, String phone, String address, AccountUser accountUser) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.address = address;
-        this.account = account;
-        this.password = password;
+        this.accountUser = accountUser;
+    }
+
+    public Customer(String name, String email, String phone, String address, AccountUser accountUser) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.accountUser = accountUser;
+    }
+
+    public Customer(String name, String email, String phone, String address) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
     }
 
     public int getId() {
@@ -62,32 +75,11 @@ public class Customer {
         this.address = address;
     }
 
-    public String getAccount() {
-        return account;
+    public AccountUser getAccountUser() {
+        return accountUser;
     }
 
-    public void setAccount(String account) {
-        this.account = account;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
-                ", address='" + address + '\'' +
-                ", account='" + account + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+    public void setAccountUser(AccountUser accountUser) {
+        this.accountUser = accountUser;
     }
 }

@@ -20,9 +20,12 @@
 </head>
 <body>
 <div class="row">
-    <di class="col-8">
+    <div class="col-4">
         <a href="/UserServlet?action=create">Thêm Người dùng mới</a>
-    </di>
+    </div>
+    <div>
+        <a href="/UserServlet"></a>
+    </div>
     <div class="col-4">
         <form class="d-flex" method="post" for="search" action="/UserServlet?action=find_country">
             <input class="form-control me-1" name="country" type="search" placeholder="Search" aria-label="Search">

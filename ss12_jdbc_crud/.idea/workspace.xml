@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="1da25fe2-096d-4406-8248-d6a326e111a5" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../case_study_home/manage_merch/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../case_study_home/manage_merch/src/main/java/com/example/manage_merch/model/AccountID.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../case_study_home/manage_merch/src/main/java/com/example/manage_merch/repository/BaseRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../case_study_home/manage_merch/src/main/java/com/example/manage_merch/repository/CustomerRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../case_study_home/manage_merch/src/main/java/com/example/manage_merch/repository/ICustomerRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../case_study_home/manage_merch/src/main/java/com/example/manage_merch/service/CustomerService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../case_study_home/manage_merch/src/main/java/com/example/manage_merch/service/ICustomerService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../case_study_team/.idea/case_study_team.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../case_study_home/manage_merch/.gradle/7.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../case_study_home/manage_merch/.gradle/7.1.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../case_study_home/manage_merch/.gradle/7.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../case_study_home/manage_merch/.gradle/7.1.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../case_study_home/manage_merch/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../case_study_home/manage_merch/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../case_study_home/manage_merch/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../case_study_home/manage_merch/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../case_study_home/manage_merch/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../case_study_home/manage_merch/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../case_study_home/manage_merch/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../case_study_home/manage_merch/src/main/java/com/example/manage_merch/controller/CustomerServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/../case_study_home/manage_merch/src/main/java/com/example/manage_merch/controller/CustomerServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../case_study_home/manage_merch/src/main/java/com/example/manage_merch/controller/EmployeeServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/../case_study_home/manage_merch/src/main/java/com/example/manage_merch/controller/EmployeeServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../case_study_home/manage_merch/src/main/java/com/example/manage_merch/model/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../case_study_home/manage_merch/src/main/java/com/example/manage_merch/model/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../case_study_home/manage_merch/src/main/java/com/example/manage_merch/model/employee.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../case_study_home/manage_merch/src/main/webapp/customer/create-customer.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../case_study_home/manage_merch/src/main/webapp/employee/create.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../case_study_home/manage_merch/src/main/webapp/customer/delete-customer.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../case_study_home/manage_merch/src/main/webapp/employee/list.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../case_study_home/manage_merch/src/main/webapp/customer/edit-customer.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../case_study_home/manage_merch/src/main/webapp/employee/update.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../case_study_home/manage_merch/src/main/webapp/customer/list-customer.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../case_study_home/manage_merch/src/main/webapp/home.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../case_study_home/manage_merch/src/main/webapp/customer/view-customer.jspx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../case_study_home/manage_merch/src/main/webapp/employee/list-employee.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../case_study_home/manage_merch/src/main/webapp/customer/list.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../case_study_home/manage_merch/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../case_study_home/manage_merch/src/main/webapp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../case_study_sql/castudy_team_four.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../case_study_sql/castudy_team_four.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bai_tap/manage_user/.gradle/7.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/bai_tap/manage_user/.gradle/7.1.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bai_tap/manage_user/.gradle/7.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/bai_tap/manage_user/.gradle/7.1.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bai_tap/manage_user/.gradle/7.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/bai_tap/manage_user/.gradle/7.1.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bai_tap/manage_user/.gradle/7.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/bai_tap/manage_user/.gradle/7.1.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bai_tap/manage_user/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/bai_tap/manage_user/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bai_tap/manage_user/build/classes/java/main/com/example/manage_user/repository/IUserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/bai_tap/manage_user/build/classes/java/main/com/example/manage_user/repository/IUserRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bai_tap/manage_user/build/classes/java/main/com/example/manage_user/repository/impl/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/bai_tap/manage_user/build/classes/java/main/com/example/manage_user/repository/impl/UserRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bai_tap/manage_user/build/classes/java/main/com/example/manage_user/service/IUserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/bai_tap/manage_user/build/classes/java/main/com/example/manage_user/service/IUserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bai_tap/manage_user/build/classes/java/main/com/example/manage_user/service/impl/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/bai_tap/manage_user/build/classes/java/main/com/example/manage_user/service/impl/UserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bai_tap/manage_user/build/libs/manage_user-1.0-SNAPSHOT.war" beforeDir="false" afterPath="$PROJECT_DIR$/bai_tap/manage_user/build/libs/manage_user-1.0-SNAPSHOT.war" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bai_tap/manage_user/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/bai_tap/manage_user/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bai_tap/manage_user/src/main/webapp/list.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/bai_tap/manage_user/src/main/webapp/list.jsp" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="2Qgj7XYQppLtxLyYpTx7d5H1AyC" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/bai_tap/manage_user" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1da25fe2-096d-4406-8248-d6a326e111a5" name="Changes" comment="" />
+      <created>1685781952241</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1685781952241</updated>
+      <workItem from="1685781953617" duration="16000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
