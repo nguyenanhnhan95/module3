@@ -18,7 +18,7 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 <body>
-<form action="/UserServlet?action=create" method="post">
+<form action="/users?action=create" method="post">
     <div class="mb-3">
         <label for="name" class="form-label">Name</label>
         <input type="name" class="form-control" id="name" name="name">

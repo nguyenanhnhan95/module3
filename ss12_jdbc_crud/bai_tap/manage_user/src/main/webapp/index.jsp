@@ -8,6 +8,6 @@
 <h1><%= "Home!" %>
 </h1>
 <br/>
-<a href="/UserServlet">Thông Tin Người Dùng</a>
+<a href="/users">Thông Tin Người Dùng</a>
 </body>
 </html>

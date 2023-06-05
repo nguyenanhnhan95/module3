@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "UserServlet", value = "/UserServlet")
+@WebServlet(name = "UserServlet", value = "/users")
 public class UserServlet extends HttpServlet {
     private UserService userService = new UserService();
 
@@ -70,7 +70,7 @@ public class UserServlet extends HttpServlet {
         User user = new User(id, name, email, country);
         userService.editUser(user);
         try {
-            response.sendRedirect("/UserServlet");
+            response.sendRedirect("/users");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -83,14 +83,14 @@ public class UserServlet extends HttpServlet {
         User user = new User(name, email, country);
         userService.addUser(user);
         try {
-            response.sendRedirect("/UserServlet");
+            response.sendRedirect("/users");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     private void showAddForm(HttpServletRequest request, HttpServletResponse response) {
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("create.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/view/user/create.jsp");
         try {
             requestDispatcher.forward(request, response);
         } catch (ServletException e) {
@@ -105,7 +105,7 @@ public class UserServlet extends HttpServlet {
         System.out.println(id);
         boolean confirmDelete = userService.deleteUser(id);
         try {
-            response.sendRedirect("/UserServlet");
+            response.sendRedirect("/users");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -117,7 +117,7 @@ public class UserServlet extends HttpServlet {
         System.out.println(country);
         User user = userService.findUserByCountry(country);
         request.setAttribute("user", user);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("search.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/view/user/search.jsp");
         try {
             requestDispatcher.forward(request, response);
         } catch (ServletException e) {
@@ -131,7 +131,7 @@ public class UserServlet extends HttpServlet {
         List<User> userList = new ArrayList<>();
         userList = userService.findAllUser();
         request.setAttribute("list_user", userList);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("list.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/view/user/list.jsp");
         try {
             requestDispatcher.forward(request, response);
         } catch (ServletException e) {

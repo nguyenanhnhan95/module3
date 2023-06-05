@@ -21,10 +21,10 @@
 <body>
 <div class="row">
     <div class="col-4">
-        <a href="/UserServlet?action=create">Thêm Người dùng mới</a>
+        <a href="/users?action=create">Thêm Người dùng mới</a>
     </div>
     <div>
-        <a href="/UserServlet"></a>
+        <a href="/users"></a>
     </div>
     <div class="col-4">
         <form class="d-flex" method="post" for="search" action="/UserServlet?action=find_country">
@@ -74,7 +74,7 @@
                 <h4>Bạn có muốn xóa người dùng <span id="nameDelete"></span></h4>
             </div>
             <div class="modal-footer">
-                <form action="/UserServlet?action=delete" method="post">
+                <form action="/users?action=delete" method="post">
                     <input type="hidden" name="id" id="idDelete" value="">
 
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Không</button>
@@ -96,7 +96,7 @@
                 <h4>Nhập thông tin thay đổi <span id="nameEdit">:</span></h4>
             </div>
             <div class="modal-footer row">
-                <form action="/UserServlet?action=edit" method="post">
+                <form action="/users?action=edit" method="post">
                     <input type="hidden" name="id" id="idEdit" value="">
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
@@ -120,9 +120,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
-<script src="jquery/jquery-3.5.1.min.js"></script>
-<script src="datatables/js/jquery.dataTables.min.js"></script>
-<script src="datatables/js/dataTables.bootstrap5.min.js"></script>
+<script src="../../jquery/jquery-3.5.1.min.js"></script>
+<script src="../../datatables/js/jquery.dataTables.min.js"></script>
+<script src="../../datatables/js/dataTables.bootstrap5.min.js"></script>
 <script>
     $(document).ready(function () {
         $('#tableUser').dataTable({
