@@ -228,7 +228,7 @@ public class UserDAO implements IUserDao {
 
                 for (int permisionId : permision) {
 
-                    pstmtAssignment.setInt(1, userId);
+                    pstmtAssignment.setInt(2, userId);
 
                     pstmtAssignment.setInt(2, permisionId);
 
@@ -290,11 +290,9 @@ public class UserDAO implements IUserDao {
              PreparedStatement psUpdate = conn.prepareStatement(SQL_UPDATE)) {
 
 
-
             statement.execute(SQL_TABLE_DROP);
 
             statement.execute(SQL_TABLE_CREATE);
-
 
 
             // Run list of insert commands
@@ -308,7 +306,6 @@ public class UserDAO implements IUserDao {
             psInsert.execute();
 
 
-
             psInsert.setString(1, "Ngan");
 
             psInsert.setBigDecimal(2, new BigDecimal(20));
@@ -318,9 +315,7 @@ public class UserDAO implements IUserDao {
             psInsert.execute();
 
 
-
             // Run list of update commands
-
 
 
             // below line caused error, test transaction
@@ -328,7 +323,6 @@ public class UserDAO implements IUserDao {
             // org.postgresql.util.PSQLException: No value specified for parameter 1.
 
             psUpdate.setBigDecimal(1, new BigDecimal(999.99));
-
 
 
             //psUpdate.setBigDecimal(1, new BigDecimal(999.99));
